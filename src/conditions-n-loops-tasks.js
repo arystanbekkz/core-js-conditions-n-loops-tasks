@@ -40,12 +40,14 @@ function isPositive(number) {
  */
 function getMaxNumber(a, b, c) {
   let max;
-  [a, b, c].forEach((num) => {
-    if (!max) max = num;
-    if (num > max) {
-      max = num;
-    }
-  });
+  if (a > b && a > c) {
+    max = a;
+  } else if (b > c) {
+    max = b;
+  } else {
+    max = c;
+  }
+  return max;
 }
 
 /**
