@@ -328,22 +328,27 @@ function rotateMatrix(matrix) {
 function sortByAsc(arr) {
   if (arr.length <= 1) return arr;
 
-  const pivot = arr[arr.length - 1];
+  const pivot = arr[0];
+
   const left = [];
   const right = [];
-  const equal = [];
+  let idL = 0;
+  let idR = 0;
 
-  for (let i = 0; i < arr.length - 1; i += 1) {
+  for (let i = 1; i < arr.length; i += 1) {
     if (arr[i] < pivot) {
-      left.push(arr[i]);
-    } else if (arr[i] > pivot) {
-      right.push(arr[i]);
+      left[idL] = arr[i];
+      idL += 1;
     } else {
-      equal.push(arr[i]);
+      right[idR] = arr[i];
+      idR += 1;
     }
   }
 
-  return [...sortByAsc(left), ...equal, ...sortByAsc(right)];
+  const temp = [...sortByAsc(left), pivot, ...sortByAsc(right)];
+  const res = arr;
+  for (let i = 0; i < arr.length; i += 1) res[i] = temp[i];
+  return res;
 }
 
 /**
